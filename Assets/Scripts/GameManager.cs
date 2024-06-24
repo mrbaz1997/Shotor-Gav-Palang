@@ -22,8 +22,14 @@ public class GameManager : MonoBehaviour
         else
         {
             currentLevelObject = Instantiate(levelPrefab);
-            currentLevelObject.Setup(StartNewLevel, GoNextLevel);
+            currentLevelObject.Setup(ResetLevel, GoNextLevel);
         }
+    }
+
+    private void ResetLevel()
+    {
+        Destroy(currentLevelObject.gameObject);
+        StartNewLevel();
     }
 
     private void GoNextLevel()

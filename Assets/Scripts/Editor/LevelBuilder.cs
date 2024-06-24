@@ -79,7 +79,7 @@ public class LevelBuilderWindow : EditorWindow
             LoadAllPrefabsFromFolder("Assets/Prefabs/LevelObjects");
             RefreshPrefabPoolUI();
         })
-        { text = "Clear Exists & Reload Load All", tooltip = "Load From Prefabs/LevelObjects" };
+        { text = "Clear Exists & Reload Prefabs", tooltip = "Load From Prefabs/LevelObjects" };
         addPrefabOptions.Add(loadAllFromFolder);
         Button addPrefabButton = new(() =>
         {

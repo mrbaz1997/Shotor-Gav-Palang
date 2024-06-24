@@ -42,8 +42,8 @@ public class LevelController : MonoBehaviour
     public void Setup(Action resetAction, Action onFinish)
     {
         var resetCanvas = Resources.Load<GameObject>("ResetUI");
+        resetCanvas = Instantiate(resetCanvas, transform);
         var resetButton = resetCanvas.GetComponentInChildren<Button>();
-        Instantiate(resetButton, transform);
         resetButton.onClick.RemoveAllListeners();
         resetButton.onClick.AddListener(() => resetAction());
         _onFinish = onFinish;

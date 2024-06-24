@@ -4,7 +4,7 @@ using UnityEngine;
 public class LaserOperation : DirectionalOperationBase
 {
     [SerializeField] private Light light1, light2;
-    private void OnEnable()
+    private void Start()
     {
         Vector2 direction = GetDirection();
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, direction, 100, 1 << 7);
@@ -41,6 +41,6 @@ public class LaserOperation : DirectionalOperationBase
 
     public override void Setup()
     {
-        OnEnable();
+        Start();
     }
 }
