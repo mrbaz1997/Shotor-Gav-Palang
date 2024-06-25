@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -34,8 +35,15 @@ public class GameManager : MonoBehaviour
 
     private void GoNextLevel()
     {
-        Destroy(currentLevelObject);
         currentLevelId++;
+        StartCoroutine(DelayStartNextLevel());
+    }
+
+    private IEnumerator DelayStartNextLevel()
+    {
+        yield return new WaitForSeconds(0.25f);
+        Destroy(currentLevelObject.gameObject);
+        yield return new WaitForEndOfFrame();
         StartNewLevel();
     }
 }

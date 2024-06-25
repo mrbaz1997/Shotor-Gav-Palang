@@ -232,6 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelId: 1
+  width: 12
+  height: 7
 --- !u!1001 &4332525647462593
 PrefabInstance:
   m_ObjectHideFlags: 0

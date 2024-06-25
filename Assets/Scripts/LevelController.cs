@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour
 {
-    //private SelectableObject[] allSeletables;
+    public int levelId;
+    [SerializeField] private uint width, height;
     private Camera mainCamera;
     SelectableObject selectedCharacter;
     private bool checkLightedAreas;
     private Light[] lights;
-    public int levelId;
     private Action _onFinish;
+    //private SelectableObject[] allSeletables;
 
     private void Start()
     {
@@ -41,12 +43,41 @@ public class LevelController : MonoBehaviour
 
     public void Setup(Action resetAction, Action onFinish)
     {
+        SetupCamera();
+        SetupResetButton(resetAction);
+        _onFinish = onFinish;
+    }
+
+    private void SetupCamera()
+    {
+        Camera mainCamera = Camera.main;
+        mainCamera.transform.position = new Vector3((width / 2f) - 0.5f, 0.5f - (height / 2f), mainCamera.transform.position.z);
+        float levelAspect = (float)width / height;
+        float screenAspect = (float)Screen.width / Screen.height;
+
+        if (screenAspect > 1f)
+        {
+            if (levelAspect > screenAspect)
+                mainCamera.orthographicSize = width / screenAspect;
+            else
+                mainCamera.orthographicSize = height / screenAspect;
+        }
+        else
+        {
+            if (levelAspect < screenAspect)
+                mainCamera.orthographicSize = (height / 2f) + 0.5f;
+            else
+                mainCamera.orthographicSize = height / screenAspect;
+        }
+    }
+
+    private void SetupResetButton(Action resetAction)
+    {
         var resetCanvas = Resources.Load<GameObject>("ResetUI");
         resetCanvas = Instantiate(resetCanvas, transform);
         var resetButton = resetCanvas.GetComponentInChildren<Button>();
         resetButton.onClick.RemoveAllListeners();
         resetButton.onClick.AddListener(() => resetAction());
-        _onFinish = onFinish;
     }
 
     private void OnSelectObject()
@@ -89,8 +120,16 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public void Finish()
+    public void CheckFinish()
     {
-        _onFinish();
+        if (!GetComponentsInChildren<Box>().Any(x => x.isDetecting))
+            _onFinish();
+    }
+
+    public void SetData(int levelId, uint width, uint height)
+    {
+        this.levelId = levelId;
+        this.width = width;
+        this.height = height;
     }
 }

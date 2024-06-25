@@ -411,7 +411,7 @@ public class LevelBuilderWindow : EditorWindow
             return;
         }
         parentObject = new GameObject("LevelGrid", typeof(LevelController));
-        parentObject.GetComponent<LevelController>().levelId = levelId;
+        parentObject.GetComponent<LevelController>().SetData(levelId, width, height);
 
         if (hasDirectionalLight)
         {
@@ -494,7 +494,7 @@ public class LevelBuilderWindow : EditorWindow
             localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
             PrefabUtility.SaveAsPrefabAssetAndConnect(parentObject, localPath, InteractionMode.UserAction);
             Debug.Log("Level saved as: " + localPath);
-            Destroy(parentObject);
+            DestroyImmediate(parentObject);
             parentObject = null;
         }
     }

@@ -14,7 +14,7 @@ public class LaserOperation : DirectionalOperationBase
             if (hit.collider.gameObject != transform.parent.gameObject)
             {
                 SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-                spriteRenderer.size = spriteRenderer.size.SetY(Vector3.Distance(transform.position, hit.collider.transform.position) - 0.5f);
+                spriteRenderer.size = spriteRenderer.size.SetY(hit.distance);
                 light2.transform.localPosition = new Vector3(0f, -spriteRenderer.size.y, -0.5f);
                 transform.localEulerAngles = GetEulerAngles(ref direction);
                 var collider = GetComponent<BoxCollider2D>();

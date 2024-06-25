@@ -226,7 +226,7 @@ Camera:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsConfig: {fileID: 11400000, guid: 472d34f37a8d14848a5a1288c79deb32, type: 2}
-  currentLevelId: 1
+  currentLevelId: 0
 --- !u!4 &1296717662
 Transform:
   m_ObjectHideFlags: 0

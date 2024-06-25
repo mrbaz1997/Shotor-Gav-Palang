@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6706154403233075472, guid: e7651bfeebbf972488d427a61ee62ef3, type: 3}
       propertyPath: direction
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6706154403233075472, guid: e7651bfeebbf972488d427a61ee62ef3, type: 3}
       propertyPath: isMovingForward
