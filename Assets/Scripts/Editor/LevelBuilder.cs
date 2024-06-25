@@ -35,7 +35,7 @@ public class LevelBuilderWindow : EditorWindow
     {
         prefabPool ??= new List<GameObject>();
         gridLayers ??= new Dictionary<int, PrefabData[,]>();
-
+        parentObject = null;
         //InitializeGridLayers();
     }
 
@@ -214,6 +214,7 @@ public class LevelBuilderWindow : EditorWindow
             {
                 prefabPool.RemoveAt(index);
                 RefreshPrefabPoolUI();
+                ShowSerializableFields();
             })
             { text = "Remove" };
             prefabElement.Add(removeButton);
@@ -231,18 +232,20 @@ public class LevelBuilderWindow : EditorWindow
 
     private void OnSelectPrefab(int index)
     {
-        if (prefabPool[index] == null) return;
-        selectedPrefabIndex = index;
-        int layer = prefabPool[index].layer;
-        if (!gridLayers.ContainsKey(layer))
+        if (prefabPool[index] != null)
         {
-            PrefabData[,] grid = new PrefabData[maxWidth, maxHeight];
-            for (int x = 0; x < maxWidth; x++)
+            selectedPrefabIndex = index;
+            int layer = prefabPool[index].layer;
+            if (!gridLayers.ContainsKey(layer))
             {
-                for (int y = 0; y < maxHeight; y++)
-                    grid[x, y] = new PrefabData();
+                PrefabData[,] grid = new PrefabData[maxWidth, maxHeight];
+                for (int x = 0; x < maxWidth; x++)
+                {
+                    for (int y = 0; y < maxHeight; y++)
+                        grid[x, y] = new PrefabData();
+                }
+                gridLayers[layer] = grid;
             }
-            gridLayers[layer] = grid;
         }
 
         ShowSerializableFields();
@@ -410,6 +413,9 @@ public class LevelBuilderWindow : EditorWindow
             Debug.LogError("Prefab pool is empty!");
             return;
         }
+        if(parentObject != null)
+            DestroyImmediate(parentObject);
+
         parentObject = new GameObject("LevelGrid", typeof(LevelController));
         parentObject.GetComponent<LevelController>().SetData(levelId, width, height);
 

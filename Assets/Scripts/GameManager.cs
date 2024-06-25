@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //StartNewLevel();
+        randomGeneratedLevel.gameObject.SetActive(true);
     }
 
     public void StartNewLevel()

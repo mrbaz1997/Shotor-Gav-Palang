@@ -43,8 +43,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.22988339, b: 0.1415093, a: 1}
-  m_Intensity: 1.04
+  m_Color: {r: 1, g: 0.627451, b: 0.627451, a: 1}
+  m_Intensity: 1.4
   m_Range: 4
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -176,7 +176,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.1, y: 1}
+  m_Size: {x: 0.1, y: 0}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -195,8 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  light1: {fileID: 4521953281485969905}
-  light2: {fileID: 3450201266423816378}
+  light1Range: 4
+  light2Range: 4
 --- !u!61 &7396425753244742278
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -229,18 +229,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 1}
     oldSize: {x: 0.38, y: 1}
-    newSize: {x: 0.1, y: 1}
+    newSize: {x: 0.1, y: 0}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1}
+  m_Size: {x: 0.1, y: 0.0001}
   m_EdgeRadius: 0
 --- !u!1 &5882483815384116762
 GameObject:
@@ -285,8 +285,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.23137255, b: 0.14117648, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.627451, b: 0.627451, a: 1}
+  m_Intensity: 1.4
   m_Range: 4
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

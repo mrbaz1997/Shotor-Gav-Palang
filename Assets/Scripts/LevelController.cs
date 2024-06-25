@@ -46,6 +46,9 @@ public class LevelController : MonoBehaviour
         SetupCamera();
         SetupResetButton(resetAction);
         _onFinish = onFinish;
+        var operations = GetComponentsInChildren<OperationBase>();
+        foreach (var item in operations)
+            item.Setup();
     }
 
     protected void SetupCamera()
