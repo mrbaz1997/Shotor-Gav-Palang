@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private RandomGeneratedLevel randomGeneratedLevel;
     [SerializeField] private LevelsConfig levelsConfig;
     [SerializeField] private int currentLevelId;
     private LevelController currentLevelObject;
 
     private void Start()
     {
-        StartNewLevel();
+        //StartNewLevel();
     }
 
-    private void StartNewLevel()
+    public void StartNewLevel()
     {
+        randomGeneratedLevel.gameObject.SetActive(false);
         var levelPrefab = levelsConfig.GetLevel(currentLevelId);
 
         if (levelPrefab == null)

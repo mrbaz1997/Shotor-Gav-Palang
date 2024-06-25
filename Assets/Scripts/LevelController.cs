@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LevelController : MonoBehaviour
 {
     public int levelId;
-    [SerializeField] private uint width, height;
+    public uint width, height;
     private Camera mainCamera;
     SelectableObject selectedCharacter;
     private bool checkLightedAreas;
@@ -48,7 +48,7 @@ public class LevelController : MonoBehaviour
         _onFinish = onFinish;
     }
 
-    private void SetupCamera()
+    protected void SetupCamera()
     {
         Camera mainCamera = Camera.main;
         mainCamera.transform.position = new Vector3((width / 2f) - 0.5f, 0.5f - (height / 2f), mainCamera.transform.position.z);
@@ -58,16 +58,16 @@ public class LevelController : MonoBehaviour
         if (screenAspect > 1f)
         {
             if (levelAspect > screenAspect)
-                mainCamera.orthographicSize = width / screenAspect;
+                mainCamera.orthographicSize = (width / 2f / screenAspect) + 0.5f;
             else
-                mainCamera.orthographicSize = height / screenAspect;
+                mainCamera.orthographicSize = (height / 2f) + 0.5f;
         }
         else
         {
             if (levelAspect < screenAspect)
                 mainCamera.orthographicSize = (height / 2f) + 0.5f;
             else
-                mainCamera.orthographicSize = height / screenAspect;
+                mainCamera.orthographicSize = (width / 2f / screenAspect) + 0.5f;
         }
     }
 
@@ -94,13 +94,18 @@ public class LevelController : MonoBehaviour
             }
             else
             {
-                character.AssignOperatorObject(selectedCharacter.operation);
-                selectedCharacter.AssignOperatorObject(character.operation);
-                (character.operation, selectedCharacter.operation) = (selectedCharacter.operation, character.operation);
+                SwapOperations(selectedCharacter, character);
                 selectedCharacter.OnUnselect();
                 selectedCharacter = null;
             }
         }
+    }
+
+    protected void SwapOperations(SelectableObject selectedCharacter, SelectableObject character)
+    {
+        character.AssignOperatorObject(selectedCharacter.operation);
+        selectedCharacter.AssignOperatorObject(character.operation);
+        (character.operation, selectedCharacter.operation) = (selectedCharacter.operation, character.operation);
     }
 
     private bool CheckLightedAreas(Vector2 selectedPosition)

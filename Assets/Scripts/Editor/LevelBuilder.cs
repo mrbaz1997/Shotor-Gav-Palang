@@ -416,7 +416,9 @@ public class LevelBuilderWindow : EditorWindow
         if (hasDirectionalLight)
         {
             parentObject.AddComponent<Light>();
-            parentObject.GetComponent<Light>().type = LightType.Directional;
+            Light light = parentObject.GetComponent<Light>();
+            light.type = LightType.Directional;
+            light.color = new Color(0.5f, 0.5f, 0.5f);
         }
 
         foreach (var layer in gridLayers.Keys)
