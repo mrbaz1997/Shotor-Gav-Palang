@@ -1,5 +1,3 @@
-using MyBox;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,14 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Levels")]
 public class LevelsConfig : ScriptableObject
 {
-    private HashSet<LevelController> levels;
+    private List<LevelController> levels;
 
     internal LevelController GetLevel(int currentLevel)
     {
-        if(levels.IsNullOrEmpty())
-            levels = Resources.LoadAll<LevelController>("Levels/").ToHashSet();
-        levels.RemoveWhere(x => x == null);
-        return levels.FirstOrDefault(x => x.levelId == currentLevel);
-
+        levels = Resources.LoadAll<LevelController>("Levels/").ToList();
+        levels.OrderBy(x => x.levelId);
+        if (currentLevel < levels.Count)
+            return levels[currentLevel];
+        else
+            return null;
     }
 }
